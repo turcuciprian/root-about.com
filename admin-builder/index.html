@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html ng-app="aBMain">
+<html>
 <head>
-  <meta charset="utf-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.layouts.min.css">
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link href="ss/all.css" rel="stylesheet"> <!-- Custom Style -->
 
-
+   <!-- Angular Material Dependencies -->
+   <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+   <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.min.js"></script>
+   <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
+   <script type="text/javascript" src="ss/all.min.js"></script>
+   
   <title>Admin builder</title>
+
+
 </head>
 
-<body layout-align="center start">
-  <div layout="row" layout-align="center" ng-controler="mainController as mC">
+<body ng-app="aBMain" layout-align="center start">
+  <md-content md-theme="default">
+  <div layout="row" layout-align="center" ng-controler="mainController as mC" md-theme="default">
     <div flex="90" layout="row">
       <div layout="column" flex="100">
         <md-toolbar class="aBoolbar">
@@ -33,15 +39,9 @@
       </div>
     </div>
   </div>
+</md-content>
 
-  <!-- Angular Material Dependencies -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
 
-  <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.min.js"></script>
-  <script src="ss/all.min.js"></script>
 </body>
 
 </html>
