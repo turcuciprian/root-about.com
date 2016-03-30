@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.layouts.min.css">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="ss/angular-material.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="ss/style.css" media="screen" title="no title" charset="utf-8">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link href="ss/all.css" rel="stylesheet"> <!-- Custom Style -->
-
-   <!-- Angular Material Dependencies -->
-   <script type="text/javascript"  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-   <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.0.6/angular-material.min.js"></script>
-   <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
-   <script type="text/javascript" src="ss/all.min.js"></script>
-   
-  <title>Admin builder</title>
-
-
+  <title>Admin Builder</title>
 </head>
 
-<body ng-app="aBMain" layout-align="center start">
-  <md-content md-theme="default">
-  <div layout="row" layout-align="center" ng-controler="mainController as mC" md-theme="default">
-    <div flex="90" layout="row">
-      <div layout="column" flex="100">
-        <md-toolbar class="aBoolbar">
-          <div class="md-toolbar-tools">
-            <md-button class="md-fab md-mini md-primary ">
-              <i class="material-icons">home</i>
-            </md-button>
-            <span flex></span>
-            <md-button class="md-fab md-mini">
-              <i class="material-icons">settings</i>
-            </md-button>
-          </div>
-        </md-toolbar>
-        this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for the content
-        menu this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for the content menu this is the container for
-        the content menu this is the container for the content menu
+<body>
+  <div class="aB" layout="row" ng-controller="mainCtrl as mC" layout-align="center" ng-app="aBMain">
+    <div class="box" flex="90">
+      <!-- Toolbar -->
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button ng-click="sShow=false" class="md-accent" ng-class="{isActive : !sShow}">
+            <md-icon md-font-icon="material-icons">settings</md-icon>
+            Editor
+            <md-tooltip md-visible="showTooltip" md-direction="bottom">
+              General Settings
+            </md-tooltip>
+          </md-button>
+          <h3>Admin Builder</h3>
+          <span flex></span>
+          <md-button ng-click="showSettings(sShow)" class="md-fab md-mini" ng-class="{isActive : sShow}">
+            <md-icon md-font-icon="material-icons">settings</md-icon>
+            <md-tooltip md-visible="showTooltip" md-direction="bottom">
+              General Settings
+            </md-tooltip>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <md-button class="md-raised md-accent" ng-click="menuBShow = switchBools(menuBShow)" ng-hide="sShow" ng-show="menuBShow">+ Add Menu</md-button>
+      <div ng-hide="menuBShow">
+        <md-input-container class="menuType">
+          <label>Menu Type</label>
+          <md-select ng-model="menuOptionsMod" ng-change="addMenu(menuOptionsMod)">
+                  <md-option ng-repeat="option in menuOptions| filter: {available: true}" value="{{option.type}} ">
+                    {{option.label}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
       </div>
+      <!-- Content -->
+      <md-content>
+        <div ng-show="sShow ">
+          <md-input-container class="md-block " flex-gt-sm>
+            <label>Settings Title</label>
+            <input ng-model="data.sTitle ">
+          </md-input-container>
+          <div class="md-block ">
+          <label>Settings Export</label>
+          <p>
+            <textarea ng-model="sIE" rows="5 "></textarea>
+          </p>
+          <p>
+            <md-button ng-click="importSettings()" class="md-raised md-accent">
+              <md-tooltip md-visible="showIETooltip" md-direction="bottom">
+                Click to import pasted settings
+              </md-tooltip>
+              Import
+            </md-button>
+          </p>
+        </div>
+        </div>
+        <!-- Tabs container -->
+        <md-tabs class="md-primary " md-dynamic-height md-border-bottom ng-hide="sShow ">
+          <md-tab label="{{menu.label}} " ng-repeat="menu in MainArr.menus  ">
+            <md-content class="md-padding ">
+              <h1 class="md-display-2 ">{{menu.label}}</h1>
+              <p>{{menu.description}}</p>
+              <p>
+                Menu name: {{menu.name}}
+              </p>
+            </md-content>
+          </md-tab>
+        </md-tabs>
+      </md-content>
     </div>
   </div>
-</md-content>
-
-
+  <script type="text/javascript " src="ss/lib.min.js "></script>
+  <script type="text/javascript " src="ss/script.min.js "></script>
 </body>
 
 </html>
