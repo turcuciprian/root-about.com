@@ -52,7 +52,7 @@
                             <div class="metabox" ng-repeat="mBox in aBMain.menus[selMI].children">
                               <div class="mBoxHeader">
                                 <div class="row">
-                                  <div class="col-sm-2">
+                                  <div class="col-sm-4">
 
                                     <div class="expand">
                                       <button ng-click="isCollapsed = !isCollapsed" type="button" name="button" class="btn btn-default">
@@ -68,12 +68,12 @@
                                       </button>
                                     </div>
                                   </div>
-                                  <div class="col-sm-9">
+                                  <div class="col-sm-4">
                                     <div class="label">
-                                      {{mBox.label}} - {{mBox.name}}
+                                      {{mBox.label}}
                                     </div>
                                   </div>
-                                  <div class="col-sm-1">
+                                  <div class="col-sm-4 text-right">
                                     <div class="remove">
                                       <button ng-click="removeMe(aBMain.menus[selMI].children,$index)" type="button" name="button" class="btn btn-default">
                                         <i class="glyphicon glyphicon-remove"></i>
@@ -87,7 +87,7 @@
                                 <div class="metabox" ng-repeat="field in mBox.fields">
                                   <div class="fieldHeader">
                                     <div class="row">
-                                      <div class="col-sm-2">
+                                      <div class="col-sm-4">
 
                                         <div class="expand">
                                           <button ng-click="isFieldCollapsed = !isFieldCollapsed" type="button" name="button" class="btn btn-default">
@@ -103,12 +103,12 @@
                                           </button>
                                         </div>
                                       </div>
-                                      <div class="col-sm-9">
+                                      <div class="col-sm-4">
                                         <div class="label">
-                                          {{field.label}} - {{field.name}}
+                                          {{field.label}}
                                         </div>
                                       </div>
-                                      <div class="col-sm-1">
+                                      <div class="col-sm-4 text-right">
                                         <div class="remove">
                                           <button ng-click="removeMe(mBox.fields,$index)" type="button" name="button" class="btn btn-default">
                                             <i class="glyphicon glyphicon-remove"></i>
