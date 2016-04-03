@@ -12,7 +12,7 @@ var uglify = require('gulp-uglifyjs');
 //SASS
 //
 gulp.task('sass', function () {
-  return gulp.src('./src/sass/custom/*.scss')
+  return gulp.src('./src/sass/style.min.scss')
   .pipe(sourcemaps.init())
   .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
   .pipe(sourcemaps.write())
@@ -23,7 +23,7 @@ gulp.task('sass', function () {
 //
 
 gulp.task('compressjS', function() {
-  return gulp.src('./src/js/custom/*.js')
+  return gulp.src('./src/js/*.js')
   .pipe(uglify('script.min.js', {
     outSourceMap: true,
     mangle: false
@@ -35,20 +35,10 @@ gulp.task('compressjS', function() {
 // First run files
 //
 
-//js libraries
-gulp.task('compressJsLibs', function() {
-  return gulp.src('./src/js/lib/*.js')
-  .pipe(uglify('lib.min.js', {
-    outSourceMap: true,
-    mangle: false
-  }))
-  .pipe(gulp.dest('./ss'));
-});
-
-
 gulp.task('sass:watch', function () {
-  gulp.watch('./src/sass/**/*.scss', ['sass']);
-  gulp.watch('./src/js/custom/*.js', ['compressjS']);
+  gulp.watch('./src/sass/custom/*.scss', ['sass']);
+  gulp.watch('./src/sass/style.min.scss', ['sass']);
+  gulp.watch('./src/js/*.js', ['compressjS']);
 
 });
-gulp.task('default', ['sass','compressjS','compressJsLibs','sass:watch']);
+gulp.task('default', ['sass','compressjS','sass:watch']);

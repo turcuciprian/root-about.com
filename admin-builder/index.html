@@ -3,84 +3,158 @@
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="ss/angular-material.min.css" media="screen" title="no title" charset="utf-8">
-  <link rel="stylesheet" href="ss/style.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="lib/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="ss/style.min.css" media="screen" title="no title" charset="utf-8">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <title>Admin Builder</title>
 </head>
 
-<body>
-  <div class="aB" layout="row" ng-controller="mainCtrl as mC" layout-align="center" ng-app="aBMain">
-    <div class="box" flex="90">
-      <!-- Toolbar -->
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <md-button ng-click="sShow=false" class="md-accent" ng-class="{isActive : !sShow}">
-            <md-icon md-font-icon="material-icons">settings</md-icon>
-            Editor
-            <md-tooltip md-visible="showTooltip" md-direction="bottom">
-              General Settings
-            </md-tooltip>
-          </md-button>
-          <h3>Admin Builder</h3>
-          <span flex></span>
-          <md-button ng-click="showSettings(sShow)" class="md-fab md-mini" ng-class="{isActive : sShow}">
-            <md-icon md-font-icon="material-icons">settings</md-icon>
-            <md-tooltip md-visible="showTooltip" md-direction="bottom">
-              General Settings
-            </md-tooltip>
-          </md-button>
+<body ng-app="aBMain" class="aB">
+  <div class="container container-fluid">
+    <div class="row" ng-controller="mainCtrl as mC">
+      <div class="col-md-12">
+        <!-- <div class="header row" ng-include="'templates/header.html'"> -->
+        <div class="header row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-sm-2">
+                <button class="btn btn-default" ng-class="{active: !sShow}" ng-click="contentSwitch(false)" type="button">Editor</button>
+              </div>
+              <div class="col-sm-offset-8 col-sm-2">
+                <button class="btn btn-default" ng-class="{active: sShow}" ng-click="contentSwitch(true)" type="button">Settings</button>
+              </div>
+            </div>
+          </div>
         </div>
-      </md-toolbar>
-      <md-button class="md-raised md-accent" ng-click="menuBShow = switchBools(menuBShow)" ng-hide="sShow" ng-show="menuBShow">+ Add Menu</md-button>
-      <div ng-hide="menuBShow">
-        <md-input-container class="menuType">
-          <label>Menu Type</label>
-          <md-select ng-model="menuOptionsMod" ng-change="addMenu(menuOptionsMod)">
-                  <md-option ng-repeat="option in menuOptions| filter: {available: true}" value="{{option.type}} ">
-                    {{option.label}}
-                  </md-option>
-                </md-select>
-              </md-input-container>
+        <!-- <div class="content row" ng-include="'templates/content.html'"> -->
+        <div class="content row">
+          <!-- <div class="col-md-12 content" ng-include="contentTemplate"> -->
+          <div class="col-md-12 content">
+            <!--  EDITOR CONTENT START-->
+            <div class="row" ng-show="!sShow">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-sm-2 tabs">
+                    <ul class="menus">
+                      <li ng-repeat="menu in aBMain.menus">
+                        <button ng-click="setMenu($index)" type="button" name="button" ng-class="{'btn-primary' : isMenu($index)}" class="btn - btn-default btn-block">
+                          {{menu.label}}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-sm-10" ng-show="aBMain.menus[selMI]">
+                    <h2>{{aBMain.menus[selMI].label}}</h2>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <div class="metabox" ng-repeat="mBox in aBMain.menus[selMI].children">
+                              <div class="mBoxHeader">
+                                <div class="row">
+                                  <div class="col-sm-2">
+
+                                    <div class="expand">
+                                      <button ng-click="isCollapsed = !isCollapsed" type="button" name="button" class="btn btn-default">
+                                        <i ng-class="{'glyphicon-collapse-down':isCollapsed,'glyphicon-collapse-up':!isCollapsed}" class="glyphicon"></i>
+                                      </button>
+                                    </div>
+                                    <div class="navigate">
+                                      <button ng-click="movePosition(aBMain.menus[selMI].children,$index,'up')" class="btn btn-default" type="button" name="button">
+                                        <i class="glyphicon glyphicon-arrow-up"></i>
+                                      </button>
+                                      <button ng-click="movePosition($index,'down')" class="btn btn-default" type="button" name="button">
+                                        <i class="glyphicon glyphicon-arrow-down"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-9">
+                                    <div class="label">
+                                      {{mBox.label}} - {{mBox.name}}
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-1">
+                                    <div class="remove">
+                                      <button ng-click="removeMe(aBMain.menus[selMI].children,$index)" type="button" name="button" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="mBoxBody" uib-collapse="isCollapsed">
+                                <!-- Fields START -->
+                                <div class="metabox" ng-repeat="field in mBox.fields">
+                                  <div class="fieldHeader">
+                                    <div class="row">
+                                      <div class="col-sm-2">
+
+                                        <div class="expand">
+                                          <button ng-click="isFieldCollapsed = !isFieldCollapsed" type="button" name="button" class="btn btn-default">
+                                            <i ng-class="{'glyphicon-collapse-down':isFieldCollapsed,'glyphicon-collapse-up':!isFieldCollapsed}" class="glyphicon"></i>
+                                          </button>
+                                        </div>
+                                        <div class="navigate">
+                                          <button ng-click="movePosition(mBox.fields,$index,'up')" class="btn btn-default" type="button" name="button">
+                                            <i class="glyphicon glyphicon-arrow-up"></i>
+                                          </button>
+                                          <button ng-click="movePosition(mBox.fields,$index,'down')" class="btn btn-default" type="button" name="button">
+                                            <i class="glyphicon glyphicon-arrow-down"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-9">
+                                        <div class="label">
+                                          {{field.label}} - {{field.name}}
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-1">
+                                        <div class="remove">
+                                          <button ng-click="removeMe(mBox.fields,$index)" type="button" name="button" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="fieldBody" uib-collapse="isFieldCollapsed">
+                                    Field Content
+                                  </div>
+                                </div>
+                                <!-- Fields End -->
+
+                                <div class="text-center">
+                                  <button ng-click="addField(mBox.fields)" class="btn btn-primary" type="button" name="button">Add Field</button>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <button ng-click="addMetabox(aBMain.menus[selMI].children)" class="btn btn-primary" type="button" name="button"> Add Metbox</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  Editor Content End-->
+
+            <!-- Settings container START -->
+            <div class="col-md-12" ng-show="sShow">
+              this is the settings template
+            </div>
+            <!-- Settings container END -->
+          </div>
+        </div>
       </div>
-      <!-- Content -->
-      <md-content>
-        <div ng-show="sShow ">
-          <md-input-container class="md-block " flex-gt-sm>
-            <label>Settings Title</label>
-            <input ng-model="data.sTitle ">
-          </md-input-container>
-          <div class="md-block ">
-          <label>Settings Export</label>
-          <p>
-            <textarea ng-model="sIE" rows="5 "></textarea>
-          </p>
-          <p>
-            <md-button ng-click="importSettings()" class="md-raised md-accent">
-              <md-tooltip md-visible="showIETooltip" md-direction="bottom">
-                Click to import pasted settings
-              </md-tooltip>
-              Import
-            </md-button>
-          </p>
-        </div>
-        </div>
-        <!-- Tabs container -->
-        <md-tabs class="md-primary " md-dynamic-height md-border-bottom ng-hide="sShow ">
-          <md-tab label="{{menu.label}} " ng-repeat="menu in MainArr.menus  ">
-            <md-content class="md-padding ">
-              <h1 class="md-display-2 ">{{menu.label}}</h1>
-              <p>{{menu.description}}</p>
-              <p>
-                Menu name: {{menu.name}}
-              </p>
-            </md-content>
-          </md-tab>
-        </md-tabs>
-      </md-content>
     </div>
   </div>
-  <script type="text/javascript " src="ss/lib.min.js "></script>
+  <script type="text/javascript " src="lib/angular.js "></script>
+  <script type="text/javascript " src="lib/ui-bootstrap-tpls-1.2.5.min.js"></script>
+  <script type="text/javascript " src="lib/angular-animate.js"></script>
   <script type="text/javascript " src="ss/script.min.js "></script>
 </body>
 
