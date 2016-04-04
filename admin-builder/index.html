@@ -134,9 +134,11 @@
                                   </div>
                                 </div>
                                 <!-- Fields End -->
-
-                                <div class="text-center addButton">
-                                  <button ng-click="addField(mBox.fields)" class="btn btn-primary" type="button" name="button">Add Field</button>
+                                <div class="text-center addField">
+                                  <select name="addField" class="form-control" ng-model="fieldModel" ng-change="addField(mBox.fields,fieldModel)">
+                                    <option ng-repeat="fO in fieldOptions" value="{{fO.type}}">{{fO.label}}</option>
+                                  </select>
+                                  field is: {{fieldModel}}
                                 </div>
 
                               </div>
