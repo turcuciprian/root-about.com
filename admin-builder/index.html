@@ -111,7 +111,7 @@
                                     <!-- Context START -->
                                     <div class="input-group">
                                       <span class="input-group-addon" uib-tooltip="Where the metabox should be positioned on the page. Normal (under content tinyMCE) or side panel (the right).">Context</span>
-                                      <select class="form-control" name="context" ng-model="mBox.context" >
+                                      <select class="form-control" name="context" ng-model="mBox.context">
                                         <option ng-repeat="context in mBContext" value="{{context.value}}">{{context.label}}</option>
                                       </select>
                                     </div>
@@ -120,7 +120,7 @@
                                     <!-- Priority START -->
                                     <div class="input-group">
                                       <span class="input-group-addon" uib-tooltip="The importance (position wise) of the meta-box.">Priority</span>
-                                      <select class="form-control" name="priority" ng-model="mBox.priority" >
+                                      <select class="form-control" name="priority" ng-model="mBox.priority">
                                         <option ng-repeat="priority in mBPriority" value="{{priority.value}}">{{priority.label}}</option>
                                       </select>
                                     </div>
@@ -174,7 +174,31 @@
                                         </div>
                                       </div>
                                       <div class="fieldBody" uib-collapse="isFieldCollapsed">
-                                        Field Content
+                                        <!-- individual field html structure -->
+
+
+                                        <!-- Label START -->
+                                        <div class="input-group">
+                                          <span class="input-group-addon" uib-tooltip="The text label of the field.">Label</span>
+                                          <input ng-model="field.label" type="text" class="form-control" placeholder="fieldLabel" value="{{field.label}}" />
+                                        </div>
+                                        <!-- Label END -->
+
+                                        <!-- Label START -->
+                                        <div class="input-group">
+                                          <span class="input-group-addon" uib-tooltip="The unique name of the field.">Name</span>
+                                          <input ng-model="field.name" type="text" class="form-control" readonly placeholder="fieldName" value="{{field.name}}" />
+                                        </div>
+                                        <!-- Label END -->
+
+                                        <!-- Label START -->
+                                        <div class="input-group">
+                                          <span class="input-group-addon" uib-tooltip="text Description of what the field Does">Description</span>
+                                          <textarea ng-model="field.description" type="text" class="form-control" placeholder="fieldDescription">{{field.description}}</textarea>
+                                        </div>
+                                        <!-- Label END -->
+
+
                                       </div>
                                     </div>
                                   </div>
