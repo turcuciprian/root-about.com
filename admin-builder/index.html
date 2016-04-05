@@ -45,6 +45,9 @@
                   </div>
                   <div class="col-sm-10" ng-show="aBMain.menus[selMI]">
                     <h2>{{aBMain.menus[selMI].label}}</h2>
+                    <p>
+                      metaboxes for the {{aBMain.menus[selMI].label}} post type. Add, edit, delete, sort meta boxes here.
+                    </p>
                     <div class="row">
                       <div class="col-sm-12">
                         <div class="row metabox" ng-repeat="mBox in aBMain.menus[selMI].children">
@@ -87,7 +90,11 @@
                               </div>
                               <div class="mBoxBody" uib-collapse="isCollapsed">
                                 <div class="row">
-                                  <div class="col-sm-2 col-sm-offset-10">
+                                  <div class="col-sm-10">
+                                    <h2 ng-show="!mBoxSett" class="fieldsGTitle">Dynamic fields:</h2>
+                                    <h2 ng-show="mBoxSett" class="fieldsGTitle">Edit Metabox Settings:</h2>
+                                  </div>
+                                  <div class="col-sm-2">
                                     <button type="button" name="button" ng-click="mBoxSett = !mBoxSett" ng-class="{'btn-default':!mBoxSett,'btn-primary':mBoxSett}" class="btn btn-block">Edit</button>
                                   </div>
                                 </div>
@@ -125,86 +132,89 @@
                                       </select>
                                     </div>
                                     <!-- Priority END -->
-
-
-
-
                                   </div>
                                 </div>
                                 <!-- MetaBox Settings container END -->
-                                <!-- Fields START -->
-                                <div class="field" ng-repeat="field in mBox.fields" ng-show="!mBoxSett">
-                                  <div class="row">
-                                    <div class="col-sm-10 col-sm-offset-1 fMainContainer">
-                                      <div class="fieldHeader">
-                                        <div class="row">
-                                          <div class="col-sm-12">
-                                            <div class="row">
-                                              <div class="col-sm-4">
+                                <div class="fieldsContainer" ng-show="!mBoxSett">
 
-                                                <div class="expand">
-                                                  <button ng-click="isFieldCollapsed = !isFieldCollapsed" type="button" name="button" class="btn btn-default">
-                                                    <i ng-class="{'glyphicon-collapse-down':isFieldCollapsed,'glyphicon-collapse-up':!isFieldCollapsed}" class="glyphicon"></i>
-                                                  </button>
+                                  <p>
+                                    Fields in the metabox generated. Sort, add, delete, edit Fields here.
+                                  </p>
+                                  <!-- Fields START -->
+                                  <div class="field" ng-repeat="field in mBox.fields">
+                                    <div class="row">
+                                      <div class="col-sm-10 col-sm-offset-1 fMainContainer">
+                                        <div class="fieldHeader">
+                                          <div class="row">
+                                            <div class="col-sm-12">
+                                              <div class="row">
+                                                <div class="col-sm-4">
+
+                                                  <div class="expand">
+                                                    <button ng-click="isFieldCollapsed = !isFieldCollapsed" type="button" name="button" class="btn btn-default">
+                                                      <i ng-class="{'glyphicon-collapse-down':isFieldCollapsed,'glyphicon-collapse-up':!isFieldCollapsed}" class="glyphicon"></i>
+                                                    </button>
+                                                  </div>
+                                                  <div class="navigate">
+                                                    <button ng-click="movePosition(mBox.fields,$index,'up')" class="btn btn-default" type="button" name="button">
+                                                      <i class="glyphicon glyphicon-arrow-up"></i>
+                                                    </button>
+                                                    <button ng-click="movePosition(mBox.fields,$index,'down')" class="btn btn-default" type="button" name="button">
+                                                      <i class="glyphicon glyphicon-arrow-down"></i>
+                                                    </button>
+                                                  </div>
                                                 </div>
-                                                <div class="navigate">
-                                                  <button ng-click="movePosition(mBox.fields,$index,'up')" class="btn btn-default" type="button" name="button">
-                                                    <i class="glyphicon glyphicon-arrow-up"></i>
-                                                  </button>
-                                                  <button ng-click="movePosition(mBox.fields,$index,'down')" class="btn btn-default" type="button" name="button">
-                                                    <i class="glyphicon glyphicon-arrow-down"></i>
-                                                  </button>
+                                                <div class="col-sm-4">
+                                                  <div class="aBLLabel">
+                                                    {{field.label}}
+                                                  </div>
                                                 </div>
-                                              </div>
-                                              <div class="col-sm-4">
-                                                <div class="aBLLabel">
-                                                  {{field.label}}
-                                                </div>
-                                              </div>
-                                              <div class="col-sm-4 text-right">
-                                                <div class="remove">
-                                                  <button ng-click="removeMe(mBox.fields,$index)" type="button" name="button" class="btn btn-default">
-                                                    <i class="glyphicon glyphicon-remove"></i>
-                                                  </button>
+                                                <div class="col-sm-4 text-right">
+                                                  <div class="remove">
+                                                    <button ng-click="removeMe(mBox.fields,$index)" type="button" name="button" class="btn btn-default">
+                                                      <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>
+
                                           </div>
+                                        </div>
+                                        <div class="fieldBody" uib-collapse="isFieldCollapsed">
+                                          <!-- individual field html structure -->
+
+
+                                          <!-- Label START -->
+                                          <div class="input-group">
+                                            <span class="input-group-addon" uib-tooltip="The text label of the field.">Label</span>
+                                            <input ng-model="field.label" type="text" class="form-control" placeholder="fieldLabel" value="{{field.label}}" />
+                                          </div>
+                                          <!-- Label END -->
+
+                                          <!-- Label START -->
+                                          <div class="input-group">
+                                            <span class="input-group-addon" uib-tooltip="The unique name of the field.">Name</span>
+                                            <input ng-model="field.name" type="text" class="form-control" readonly placeholder="fieldName" value="{{field.name}}" />
+                                          </div>
+                                          <!-- Label END -->
+
+                                          <!-- Label START -->
+                                          <div class="input-group">
+                                            <span class="input-group-addon" uib-tooltip="text Description of what the field Does">Description</span>
+                                            <textarea ng-model="field.description" type="text" class="form-control" placeholder="fieldDescription">{{field.description}}</textarea>
+                                          </div>
+                                          <!-- Label END -->
+
 
                                         </div>
-                                      </div>
-                                      <div class="fieldBody" uib-collapse="isFieldCollapsed">
-                                        <!-- individual field html structure -->
-
-
-                                        <!-- Label START -->
-                                        <div class="input-group">
-                                          <span class="input-group-addon" uib-tooltip="The text label of the field.">Label</span>
-                                          <input ng-model="field.label" type="text" class="form-control" placeholder="fieldLabel" value="{{field.label}}" />
-                                        </div>
-                                        <!-- Label END -->
-
-                                        <!-- Label START -->
-                                        <div class="input-group">
-                                          <span class="input-group-addon" uib-tooltip="The unique name of the field.">Name</span>
-                                          <input ng-model="field.name" type="text" class="form-control" readonly placeholder="fieldName" value="{{field.name}}" />
-                                        </div>
-                                        <!-- Label END -->
-
-                                        <!-- Label START -->
-                                        <div class="input-group">
-                                          <span class="input-group-addon" uib-tooltip="text Description of what the field Does">Description</span>
-                                          <textarea ng-model="field.description" type="text" class="form-control" placeholder="fieldDescription">{{field.description}}</textarea>
-                                        </div>
-                                        <!-- Label END -->
-
-
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                                 <!-- Fields End -->
                                 <div class="text-center addField" ng-show="!mBoxSett">
+                                  <h4>Add Field:</h4>
                                   <select name="addField" class="form-control" ng-model="fieldModel" ng-change="addField(mBox.fields,fieldModel)">
                                     <option ng-repeat="fO in fieldOptions" value="{{fO.type}}">{{fO.label}}</option>
                                   </select>
