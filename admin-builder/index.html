@@ -244,11 +244,11 @@
               <!-- Label START -->
               <div class="input-group">
                 <span class="input-group-addon" tooltip-placement="bottom" uib-tooltip="Paste json in here to import, Select and copy to export.">Import/Export <br/> (text)</span>
-                <textarea ng-model="aBImportExport" name="name" rows="8" class="form-control">{{aBImportExport}}</textarea>
+                <textarea ng-model="aBImportExport" name="name" rows="8" class="form-control"></textarea>
               </div>
               <!-- Label END -->
               <p>
-                <button type="button" name="button" class="btn btn-primary">Import</button>
+                <button type="button" ng-click="aBImportJson()" name="button" class="btn btn-primary">Import</button>
               </p>
             </div>
             <!-- Settings container END -->
