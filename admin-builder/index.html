@@ -104,14 +104,14 @@
                                     <!-- Label START -->
                                     <div class="input-group">
                                       <span class="input-group-addon" uib-tooltip="The text label of the meta-box. What the header of the metabox text says.(Should change live as you type above.)">Label</span>
-                                      <input ng-model="mBox.label" type="text" class="form-control" placeholder="metaboxLabel" value="{{mBox.label}}" />
+                                      <input ng-model="mBox.label" type="text" class="form-control" placeholder="metabox Label" value="{{mBox.label}}" />
                                     </div>
                                     <!-- Label END -->
 
                                     <!-- Name START -->
                                     <div class="input-group">
                                       <span class="input-group-addon" uib-tooltip="the unique name of the meta-box. Used behind the scenes.">Name</span>
-                                      <input ng-model="mBox.name" type="text" class="form-control" readonly placeholder="metaboxName" value="{{mBox.name}}" />
+                                      <input ng-model="mBox.name" type="text" class="form-control" readonly placeholder="metabox Name" value="{{mBox.name}}" />
                                     </div>
                                     <!-- Name END -->
 
@@ -188,25 +188,59 @@
                                           <!-- Label START -->
                                           <div class="input-group">
                                             <span class="input-group-addon" uib-tooltip="The text label of the field.">Label</span>
-                                            <input ng-model="field.label" type="text" class="form-control" placeholder="fieldLabel" value="{{field.label}}" />
+                                            <input ng-model="field.label" type="text" class="form-control" placeholder="field Label" value="{{field.label}}" />
                                           </div>
                                           <!-- Label END -->
 
-                                          <!-- Label START -->
+                                          <!-- Field Name START -->
                                           <div class="input-group">
                                             <span class="input-group-addon" uib-tooltip="The unique name of the field.">Name</span>
-                                            <input ng-model="field.name" type="text" class="form-control" readonly placeholder="fieldName" value="{{field.name}}" />
+                                            <input ng-model="field.name" type="text" class="form-control" readonly placeholder="field Name" value="{{field.name}}" />
                                           </div>
-                                          <!-- Label END -->
+                                          <!-- Field Name END -->
 
-                                          <!-- Label START -->
+                                          <!-- field Description START -->
                                           <div class="input-group">
                                             <span class="input-group-addon" uib-tooltip="text Description of what the field Does">Description</span>
-                                            <textarea ng-model="field.description" type="text" class="form-control" placeholder="fieldDescription">{{field.description}}</textarea>
+                                            <textarea ng-model="field.description" type="text" class="form-control" placeholder="field Description">{{field.description}}</textarea>
                                           </div>
-                                          <!-- Label END -->
+                                          <!-- field Description END -->
 
+                                          <!-- select type START -->
+                                          <div class="input-group" ng-show="showHideField(field,'select');">
+                                            <span class="input-group-addon" uib-tooltip="The type of the select option.">Select Type:</span>
+                                            <select ng-model="field.selectType" class="form-control" placeholder="selectType">
+                                              <option ng-repeat="sType in selectTypes" value="{{sType.value}}">{{sType.label}}</option>
+                                            </select>
+                                          </div>
+                                          <!-- select type END -->
 
+                                          <!-- Custom Options START -->
+                                          <div class="input-group" ng-show="showHideField(field,'custom','selectType');">
+
+                                            <span class="input-group-addon" uib-tooltip="The type of the select option.">Dynamic Values:</span>
+
+                                            <div class="form-control flexibleHeight">
+                                                <p class="newVal" ng-repeat="cV in field.oArr"><!-- cV stands for custom Value-->
+                                                  Value: <input type="text" ng-model="cV.value" name="cV.value" value="{{cV.value}}" />
+                                                  Label: <input type="text" ng-model="cV.label" name="cV.label" value="{{cV.label}}" />
+                                                  <button type="button" name="button" ng-click="removeMe(field.oArr,$index)">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                  </button>
+                                                </p>
+                                              <p>
+                                                <button type="button" name="button" ng-click="aBAddOption(field.oArr)">Add Option</button>
+                                              </p>
+                                            </div>
+                                          </div>
+                                          <!-- Custom Options END -->
+
+                                          <!-- Checkbox text START -->
+                                          <div class="input-group" ng-show="showHideField(field,'checkbox');">
+                                            <span class="input-group-addon" uib-tooltip="The text label of the field.">Checkbox Text</span>
+                                            <input ng-model="field.checkText" type="text" class="form-control" placeholder="Checkbox Text" value="{{field.checkText}}" />
+                                          </div>
+                                          <!-- Checkbox text END -->
                                         </div>
                                       </div>
                                     </div>
