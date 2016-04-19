@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Posts on RootAbout.com </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://rootabout.com/post/</link>
+    
+    
+    
+    <updated>Fri, 20 Apr 2012 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Admin Builder</title>
+      <link>http://rootabout.com/2012/04/admin-builder/</link>
+      <pubDate>Fri, 20 Apr 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://rootabout.com/2012/04/admin-builder/</guid>
+      <description>
+
+&lt;h3 id=&#34;the-service:48eed3b58f921694933c5e61d6a0e76f&#34;&gt;The service&lt;/h3&gt;
+
+&lt;p&gt;It looks like this:
+&lt;img src=&#34;http://rootabout.com/img/screenshot1.png&#34; alt=&#34;Alt text&#34; title=&#34;Admin Builder Service&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Available at &lt;a href=&#34;http://rootabout.com/admin-builder&#34;&gt;http://rootabout.com/admin-builder&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is where you can add metaboxes (as many as you want, rename and position how you want, in any order that you can sort at any time), to posts and pages and add fields (textbox, textarea, select of multiple types, radio buttons, date picker, time picker, color picker, media upload button). Again, unlimited, in any order, configurable.&lt;/p&gt;
+
+&lt;p&gt;In the top right, if you click settings, you will see the exported jSon String that you can copy and paste into the&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;wordpress-plugin:48eed3b58f921694933c5e61d6a0e76f&#34;&gt;WordPress Plugin&lt;/h3&gt;
+
+&lt;p&gt;It looks like this:
+&lt;img src=&#34;http://rootabout.com/img/screenshot2.png&#34; alt=&#34;Alt text&#34; title=&#34;Admin Builder WordPress Plugin&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Get it here: &lt;a href=&#34;https://wordpress.org/plugins/admin-builder/&#34;&gt;https://wordpress.org/plugins/admin-builder/&lt;/a&gt;. This needs to be installed in a wordpress site and activated. Then in the plugin settings, import the jSon string, and that&amp;rsquo;s it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What is this?</title>
+      <link>http://rootabout.com/2012/04/what-is-this/</link>
+      <pubDate>Fri, 20 Apr 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://rootabout.com/2012/04/what-is-this/</guid>
+      <description>&lt;p&gt;RootAbout.com is all about building tools. And it&amp;rsquo;s doing that slowly but surely starting off with a Admin Builder for WordPress admin panels, for developers. Other projects are in plan but nothing started yet. More about Admin Builder Here &lt;a href=&#34;http://www.rootabout.com/admin-builder&#34;&gt;Click here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Tools have been around for ever, prooving their usefulness and making life easier. The tools built here have that exact purpose, to make things, easier, faster, cheaper, more efficient. IF they are , it&amp;rsquo;s up for you to decide. Tools may be a general description, but the purpose is focused, each tool is built to do it&amp;rsquo;s job as well as we can make it to. Feel free to judge and give feedback. Whenever, wherever.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
