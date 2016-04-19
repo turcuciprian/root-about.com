@@ -2,28 +2,28 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>About on </title>
-    <link>/tags/about/</link>
+    <link>rootabout.com/staging/tags/about/</link>
     <description>Recent content in About on </description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Fri, 06 Apr 2012 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/tags/about/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="rootabout.com/staging/tags/about/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>What is this?</title>
-      <link>/about/</link>
+      <link>/rootabout.com/staging/about/</link>
       <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>/rootabout.com/staging/about/</guid>
       <description>&lt;p&gt;RootAbout.com is all about building tools. And it&amp;rsquo;s doing that slowly but surely starting off with a Admin Builder for WordPress admin panels, for developers. Other projects are in plan but nothing started yet&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>What is this?</title>
-      <link>/post/about/</link>
+      <link>/rootabout.com/staging/post/about/</link>
       <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
       
-      <guid>/post/about/</guid>
+      <guid>/rootabout.com/staging/post/about/</guid>
       <description>&lt;p&gt;RootAbout.com is all about building tools. And it&amp;rsquo;s doing that slowly but surely starting off with a Admin Builder for WordPress admin panels, for developers. Other projects are in plan but nothing started yet&lt;/p&gt;
 </description>
     </item>
