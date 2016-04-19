@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Purpose on </title>
+    <link>/tags/purpose/</link>
+    <description>Recent content in Purpose on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 06 Apr 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/tags/purpose/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>What is this?</title>
+      <link>/about/</link>
+      <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>&lt;p&gt;RootAbout.com is all about building tools. And it&amp;rsquo;s doing that slowly but surely starting off with a Admin Builder for WordPress admin panels, for developers. Other projects are in plan but nothing started yet&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What is this?</title>
+      <link>/post/about/</link>
+      <pubDate>Fri, 06 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/post/about/</guid>
+      <description>&lt;p&gt;RootAbout.com is all about building tools. And it&amp;rsquo;s doing that slowly but surely starting off with a Admin Builder for WordPress admin panels, for developers. Other projects are in plan but nothing started yet&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
