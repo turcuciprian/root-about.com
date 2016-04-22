@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Go on RootAbout.com </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>http://rootabout.com/categories/go/</link>
+    
+    
+    
+    <updated>Fri, 20 Apr 2012 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Create a JWT token in go - tutorial, with examples</title>
+      <link>http://rootabout.com/2012/04/create-a-jwt-token-in-go---tutorial-with-examples/</link>
+      <pubDate>Fri, 20 Apr 2012 00:00:00 UTC</pubDate>
+      
+      <guid>http://rootabout.com/2012/04/create-a-jwt-token-in-go---tutorial-with-examples/</guid>
+      <description>
+
+&lt;h3 id=&#34;jwt:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;JWT?&lt;/h3&gt;
+
+&lt;p&gt;A little backstory, JWT stands for JSON Web Tokens and they are, as adequatly said on &lt;a href=&#34;https://jwt.io/&#34;&gt;https://jwt.io/&lt;/a&gt; are an open, industry standard RFC 7519 method for representing claims securely between two parties.
+In short, It&amp;rsquo;s ultimately a string with 3 parts separated by dots. like partA.partB.partC&lt;/p&gt;
+
+&lt;p&gt;For a more in depth look of JWT check out &lt;a href=&#34;https://jwt.io/introduction/&#34;&gt;https://jwt.io/introduction/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-go:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;Install go!?&lt;/h3&gt;
+
+&lt;p&gt;This tutorial is all about going at it all the way, from start to finish on how to do what it promisses, so, the first step would be obviously to make sure go is installed.&lt;/p&gt;
+
+&lt;p&gt;To install go, go to (see what I did there) &lt;a href=&#34;https://golang.org/&#34;&gt;https://golang.org/&lt;/a&gt; and download and install (do what it says there, on that OFFICIAL page to install go.)&lt;/p&gt;
+
+&lt;h3 id=&#34;install-required-packages:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;Install required packages&lt;/h3&gt;
+
+&lt;p&gt;Ok, so, we&amp;rsquo;re going to import a few packages in our example so we need to download them and include them in the example we are going to build in this tutorial.&lt;/p&gt;
+
+&lt;p&gt;Ok, there&amp;rsquo;s actually only one package we are going to have to download and that&amp;rsquo;s &amp;ldquo;github.com/dgrijalva/jwt-go&amp;rdquo;
+To download the library do this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go get github.com/dgrijalva/jwt-go&lt;/code&gt; in your console.&lt;/p&gt;
+
+&lt;p&gt;it should just output nothing. Fingers crossed that it does. If not, you got problems. FIX THEM AND CONTINUE!.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-the-go-file:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;Create the .go file&lt;/h3&gt;
+
+&lt;p&gt;Now go and create (I did it again! I crack myself up!) a directory somewhere and create a file in it. Let&amp;rsquo;s name it test.go&lt;/p&gt;
+
+&lt;p&gt;Open that file and start writing this. First you need the package:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;package main&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then Import some stuff:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import (
+  &amp;quot;fmt&amp;quot;
+  &amp;quot;time&amp;quot;
+  &amp;quot;github.com/dgrijalva/jwt-go&amp;quot;
+  )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And that&amp;rsquo;s all we need for imports. Yey!&lt;/p&gt;
+
+&lt;h3 id=&#34;the-main-code:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;The main code&lt;/h3&gt;
+
+&lt;p&gt;Next we&amp;rsquo;re going to make the main function, that&amp;rsquo;s required, and we&amp;rsquo;re going to call our new token function in it, with a string as a parameter. We&amp;rsquo;ll name that function newToken. I know, captain obvious right?&lt;/p&gt;
+
+&lt;p&gt;here&amp;rsquo;s the next code you need in your test.go file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;func main() {
+  //2 variables are declared here. Token retains the string representation of the token and error retains any error that might come up
+  token, error := newToken(&amp;quot;test&amp;quot;)
+  //we check if there&#39;s an error
+  if error != nil {
+    //we print the error to the consolde screen if it exists.
+     fmt.Printf(&amp;quot;Houdson, we have an error: %v\n&amp;quot;,error)
+  }else{
+    //if there&#39;s no error, we print the token to the screen.
+    fmt.Printf(&amp;quot;We have a token, and it looks like this: %s \n&amp;quot;)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;token-generate-function:187f3dafa16c8268ce43bb40dca8b3e5&#34;&gt;Token Generate Function&lt;/h3&gt;
+
+&lt;p&gt;We said we where going to use the &lt;code&gt;newToken&lt;/code&gt; function to generate the token. Let&amp;rsquo;s create that function here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//generates the new token based on a given key string
+func newToken(mySigningKeyStr string) (string, error) {
+	mySigningKey := []byte(mySigningKeyStr)
+	// Create the token
+	token := jwt.New(jwt.SigningMethodHS256)
+	// Set some claims
+	token.Claims[&amp;quot;foo&amp;quot;] = &amp;quot;bar&amp;quot;
+	token.Claims[&amp;quot;exp&amp;quot;] = time.Now().Add(time.Hour * 72).Unix()
+	// Sign and get the complete encoded token as a string
+	tokenString, err := token.SignedString(mySigningKey)
+	return tokenString, err
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Basically you can give this function as a parameter a string. That string will be converted into bytes and used at the end, just before the function return to generate the actual token. Past that after the &lt;code&gt;func main&lt;/code&gt; end and to test your code do:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;go run test.go&lt;/code&gt; in the console, in the place where you saved the test.go file.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it! Any questions?&lt;/p&gt;
+
+&lt;p&gt;I thought so!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

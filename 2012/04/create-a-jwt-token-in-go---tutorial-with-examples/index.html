@@ -1,0 +1,214 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> Create a JWT token in go - tutorial, with examples &middot; RootAbout.com </title>
+    
+    <link rel="stylesheet" type="text/css" href="http://rootabout.com/css/uno.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://rootabout.com/css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="RootAbout.com" />
+    
+    <script src="http://rootabout.com/js/jquery.min.js"></script>
+    <script src="http://rootabout.com/js/main.min.js">
+    </script>
+</head>
+
+  <body>
+    <div id="scriptHeader">
+    <span class="mobile btn-mobile-menu">
+            <i class="fa fa-bars btn-mobile-menu__icon"></i>
+            <i class="fa fa-times btn-mobile-close__icon hidden"> </i>
+    </span>
+    <header class="
+        
+            panel-cover panel-cover--collapsed
+        " >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="http://rootabout.com/"  title="link to homepage for RootAbout.com">RootAbout.com</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  Building tools  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="http://rootabout.com#blog" title="link to RootAbout.com blog" class="blog-button">Blog</a> </li></br>
+                            
+                            
+                       </ul>
+                    </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation">    </br>    </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+</div>
+<noscript>
+    <style>
+        #scriptHeader {display:none;}
+        .navigation-wrapper{
+            display: block;
+            top: 0;
+        }
+    </style>
+
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url()">
+        <div class="panel-main">
+            <div class="panel-main__inner panel-inverted">
+                <div class="panel-main__content"> 
+                    <h1 class="panel-cover__title panel-title">
+                        <a href="http://rootabout.com/"  title="link to homepage for RootAbout.com">RootAbout.com</a>
+                    </h1>
+                    <hr class="panel-cover__divider" />
+                    <p class="panel-cover__description">  Building tools  </p>
+                    <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                    <div class="navigation-wrapper">
+                        <nav class="cover-navigation cover-navigation--primary">
+                            <ul class="navigation">
+                                <li class="navigation__item"><a href="http://rootabout.com/#blog" title="link to RootAbout.com blog" class="blog-button">Blog</a> </li></br>
+                                
+                                
+                           </ul>
+                        </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation">    </br>    </ul>
+</nav>
+ </div>
+                </div>
+            </div>
+            <div class="panel-cover--overlay"></div>
+        </div>
+    </header>
+</noscript>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Create a JWT token in go - tutorial, with examples</h1>
+          <span class="post-date">Fri, Apr 20, 2012</span>
+          
+
+<h3 id="jwt:187f3dafa16c8268ce43bb40dca8b3e5">JWT?</h3>
+
+<p>A little backstory, JWT stands for JSON Web Tokens and they are, as adequatly said on <a href="https://jwt.io/">https://jwt.io/</a> are an open, industry standard RFC 7519 method for representing claims securely between two parties.
+In short, It&rsquo;s ultimately a string with 3 parts separated by dots. like partA.partB.partC</p>
+
+<p>For a more in depth look of JWT check out <a href="https://jwt.io/introduction/">https://jwt.io/introduction/</a>.</p>
+
+<h3 id="install-go:187f3dafa16c8268ce43bb40dca8b3e5">Install go!?</h3>
+
+<p>This tutorial is all about going at it all the way, from start to finish on how to do what it promisses, so, the first step would be obviously to make sure go is installed.</p>
+
+<p>To install go, go to (see what I did there) <a href="https://golang.org/">https://golang.org/</a> and download and install (do what it says there, on that OFFICIAL page to install go.)</p>
+
+<h3 id="install-required-packages:187f3dafa16c8268ce43bb40dca8b3e5">Install required packages</h3>
+
+<p>Ok, so, we&rsquo;re going to import a few packages in our example so we need to download them and include them in the example we are going to build in this tutorial.</p>
+
+<p>Ok, there&rsquo;s actually only one package we are going to have to download and that&rsquo;s &ldquo;github.com/dgrijalva/jwt-go&rdquo;
+To download the library do this:</p>
+
+<p><code>go get github.com/dgrijalva/jwt-go</code> in your console.</p>
+
+<p>it should just output nothing. Fingers crossed that it does. If not, you got problems. FIX THEM AND CONTINUE!.</p>
+
+<h3 id="create-the-go-file:187f3dafa16c8268ce43bb40dca8b3e5">Create the .go file</h3>
+
+<p>Now go and create (I did it again! I crack myself up!) a directory somewhere and create a file in it. Let&rsquo;s name it test.go</p>
+
+<p>Open that file and start writing this. First you need the package:</p>
+
+<p><code>package main</code></p>
+
+<p>Then Import some stuff:</p>
+
+<pre><code>import (
+  &quot;fmt&quot;
+  &quot;time&quot;
+  &quot;github.com/dgrijalva/jwt-go&quot;
+  )
+</code></pre>
+
+<p>And that&rsquo;s all we need for imports. Yey!</p>
+
+<h3 id="the-main-code:187f3dafa16c8268ce43bb40dca8b3e5">The main code</h3>
+
+<p>Next we&rsquo;re going to make the main function, that&rsquo;s required, and we&rsquo;re going to call our new token function in it, with a string as a parameter. We&rsquo;ll name that function newToken. I know, captain obvious right?</p>
+
+<p>here&rsquo;s the next code you need in your test.go file:</p>
+
+<pre><code>func main() {
+  //2 variables are declared here. Token retains the string representation of the token and error retains any error that might come up
+  token, error := newToken(&quot;test&quot;)
+  //we check if there's an error
+  if error != nil {
+    //we print the error to the consolde screen if it exists.
+     fmt.Printf(&quot;Houdson, we have an error: %v\n&quot;,error)
+  }else{
+    //if there's no error, we print the token to the screen.
+    fmt.Printf(&quot;We have a token, and it looks like this: %s \n&quot;)
+  }
+}
+</code></pre>
+
+<h3 id="token-generate-function:187f3dafa16c8268ce43bb40dca8b3e5">Token Generate Function</h3>
+
+<p>We said we where going to use the <code>newToken</code> function to generate the token. Let&rsquo;s create that function here:</p>
+
+<pre><code>//generates the new token based on a given key string
+func newToken(mySigningKeyStr string) (string, error) {
+	mySigningKey := []byte(mySigningKeyStr)
+	// Create the token
+	token := jwt.New(jwt.SigningMethodHS256)
+	// Set some claims
+	token.Claims[&quot;foo&quot;] = &quot;bar&quot;
+	token.Claims[&quot;exp&quot;] = time.Now().Add(time.Hour * 72).Unix()
+	// Sign and get the complete encoded token as a string
+	tokenString, err := token.SignedString(mySigningKey)
+	return tokenString, err
+}
+</code></pre>
+
+<p>Basically you can give this function as a parameter a string. That string will be converted into bytes and used at the end, just before the function return to generate the actual token. Past that after the <code>func main</code> end and to test your code do:</p>
+
+<p><code>go run test.go</code> in the console, in the place where you saved the test.go file.</p>
+
+<p>That&rsquo;s it! Any questions?</p>
+
+<p>I thought so!</p>
+
+        </div>
+        <div class="sharing">
+<a href="https://twitter.com/intent/tweet?status=Create%20a%20JWT%20token%20in%20go%20-%20tutorial%2c%20with%20examples-http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f" target="_blank" title="Follow me on Twitter" class="twitter">
+<span class="fa fa-twitter-square fa-3x"></span></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f" target="_blank" title="Join me on Facebook" class="facebook">
+<span class="fa fa-facebook-square fa-3x"></span></a>
+<a href="https://plus.google.com/share?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f" target="_blank" title="Google+" class="googleplus">
+<span class="fa fa-google-plus-square fa-3x"></span></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f&title=Create%20a%20JWT%20token%20in%20go%20-%20tutorial%2c%20with%20examples" target="_blank" title="LinkedIn" class="linkedin">
+<span class="fa fa-linkedin-square fa-3x"></span></a>
+<a href="http://www.reddit.com/submit?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f" target="_blank" title="Reddit" class="reddit"><span class="fa fa-reddit-square fa-3x"></span></a>
+<a href="http://www.stumbleupon.com/submit?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fcreate-a-jwt-token-in-go---tutorial-with-examples%2f" target="_blank" title="StumbleUpon" class="stumbleupon"><span class="fa fa-stumbleupon fa-3x">
+</span></a>
+</div>
+        
+
+
+
+      </div>
+    </div>
+
+  </body>
+  
+</html>
