@@ -136,6 +136,23 @@
                             
                                 <article class="post">
 <header>
+<h2><a href="http://rootabout.com/2012/04/validate-a-jwt-token-in-go---tutorial-with-example/">Validate a JWT token in go - tutorial, with example </a> </h2>
+<div class="post-meta">Fri, Apr 20, 2012 - Read in 2 Min </div>
+</header>
+<div class="summary">
+    The full code func ValidateToken(tokenString string, myToken string) (bool, error) { token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) { //checking alg if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok { return nil, fmt.Errorf(&quot;Unexpected signing method: %v&quot;, token.Header[&quot;alg&quot;]) } return []byte(myToken), nil }) if err != nil { panic(err) } if !token.Valid { return false, nil } fmt.Printf(&quot;\n\nToken is valid!\n\n&quot;) return true, nil } That&rsquo;s basically a function that we will use to validate the code.
+</div>
+<footer>
+<a href='http://rootabout.com/2012/04/validate-a-jwt-token-in-go---tutorial-with-example/'><nobr>Read more →</nobr></a>
+</footer>
+</article>
+
+
+                            
+                        
+                            
+                                <article class="post">
+<header>
 <h2><a href="http://rootabout.com/2012/04/what-is-this/">What is this? </a> </h2>
 <div class="post-meta">Fri, Apr 20, 2012 - Read in 1 Min </div>
 </header>

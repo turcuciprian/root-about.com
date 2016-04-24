@@ -1,0 +1,188 @@
+  <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title> Validate a JWT token in go - tutorial, with example &middot; RootAbout.com </title>
+    
+    <link rel="stylesheet" type="text/css" href="http://rootabout.com/css/uno.min.css" />
+    <link rel="stylesheet" type="text/css" href="http://rootabout.com/css/lightGallery.css" />
+    
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+    <link href="" rel="alternate" type="application/rss+xml" title="RootAbout.com" />
+    
+    <script src="http://rootabout.com/js/jquery.min.js"></script>
+    <script src="http://rootabout.com/js/main.min.js">
+    </script>
+</head>
+
+  <body>
+    <div id="scriptHeader">
+    <span class="mobile btn-mobile-menu">
+            <i class="fa fa-bars btn-mobile-menu__icon"></i>
+            <i class="fa fa-times btn-mobile-close__icon hidden"> </i>
+    </span>
+    <header class="
+        
+            panel-cover panel-cover--collapsed
+        " >
+    <div class="panel-main">
+        <div class="panel-main__inner panel-inverted">
+            <div class="panel-main__content"> 
+                <h1 class="panel-cover__title panel-title">
+                    <a href="http://rootabout.com/"  title="link to homepage for RootAbout.com">RootAbout.com</a>
+                </h1>
+                <hr class="panel-cover__divider" />
+                <p class="panel-cover__description">  Building tools  </p>
+                <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                <div class="navigation-wrapper">
+                    <nav class="cover-navigation cover-navigation--primary">
+                        <ul class="navigation">
+                            <li class="navigation__item"><a href="http://rootabout.com#blog" title="link to RootAbout.com blog" class="blog-button">Blog</a> </li></br>
+                            
+                            
+                       </ul>
+                    </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation">    </br>    </ul>
+</nav>
+ </div>
+            </div>
+        </div>
+        <div class="panel-cover--overlay"></div>
+    </div>
+</header>
+</div>
+<noscript>
+    <style>
+        #scriptHeader {display:none;}
+        .navigation-wrapper{
+            display: block;
+            top: 0;
+        }
+    </style>
+
+    <header class="panel-cover panel-cover--collapsed" style="background-image: url()">
+        <div class="panel-main">
+            <div class="panel-main__inner panel-inverted">
+                <div class="panel-main__content"> 
+                    <h1 class="panel-cover__title panel-title">
+                        <a href="http://rootabout.com/"  title="link to homepage for RootAbout.com">RootAbout.com</a>
+                    </h1>
+                    <hr class="panel-cover__divider" />
+                    <p class="panel-cover__description">  Building tools  </p>
+                    <hr class="panel-cover__divider panel-cover__divider--secondary" />
+                    <div class="navigation-wrapper">
+                        <nav class="cover-navigation cover-navigation--primary">
+                            <ul class="navigation">
+                                <li class="navigation__item"><a href="http://rootabout.com/#blog" title="link to RootAbout.com blog" class="blog-button">Blog</a> </li></br>
+                                
+                                
+                           </ul>
+                        </nav> <nav class="cover-navigation navigation--social">
+    <ul class="navigation">    </br>    </ul>
+</nav>
+ </div>
+                </div>
+            </div>
+            <div class="panel-cover--overlay"></div>
+        </div>
+    </header>
+</noscript>
+
+    <div class="content-wrapper">
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Validate a JWT token in go - tutorial, with example</h1>
+          <span class="post-date">Fri, Apr 20, 2012</span>
+          
+
+<h3 id="the-full-code:31530fea85ab7d72231b769ca8c10767">The full code</h3>
+
+<pre><code>func ValidateToken(tokenString string, myToken string) (bool, error) {
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		//checking alg
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf(&quot;Unexpected signing method: %v&quot;, token.Header[&quot;alg&quot;])
+		}
+		return []byte(myToken), nil
+	})
+
+	if err != nil {
+		panic(err)
+	}
+
+	if !token.Valid {
+		return false, nil
+	}
+	fmt.Printf(&quot;\n\nToken is valid!\n\n&quot;)
+
+	return true, nil
+}
+</code></pre>
+
+<p>That&rsquo;s basically a function that we will use to validate the code. It has 2 parameters. One is the token string that we have to validate. Secondly is the token key only the server knows and that was used when generating the token.</p>
+
+<h3 id="validatin-the-token-checking-the-alg:31530fea85ab7d72231b769ca8c10767">validatin the token, checking the alg</h3>
+
+<p>We need to check that the alg is what we think it is as a security vulnerability was found in a previous version of jwt go and the documentation of the library stresses about it. So, first we create 2 new variables:</p>
+
+<pre><code>token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+</code></pre>
+
+<p>token, that returns the token as a interface{} object and err that is the error if something goes wrong. we pass the tokenString (the JWT token string) that we want to validate as the first paramter of the Parse method, and as the second paramteres, a annonimous function with token as a <code>*jwt.Token</code> type paramter. Inside here is where the magic happens.</p>
+
+<ul>
+<li><p>First we validate the alg</p>
+
+<pre><code>//checking alg
+    if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+        return nil, fmt.Errorf(&quot;Unexpected signing method: %v&quot;, token.Header[&quot;alg&quot;])
+    }
+</code></pre>
+
+<p>We need to apply, and this is very important, the <code>*jwt.SigningMethodHMAC</code> parameter value to the token,Method. as when the token was created the type used for the alg Header was <code>jwt.SigningMethodHS256</code>. So we need to check for something compatible with that encription type.<code>*jwt.SigningMethodHMAC</code> Is what we need.</p>
+
+<p>Of course, what happens here, if something goes wrong, the console will have an error printed. With specifics.</p>
+
+<p>If everything is FINE! (EVERYBODY CALM DOWN!) it should just return 2 variables:</p>
+
+<pre><code>return []byte(myToken), nil
+</code></pre>
+
+<p>The token as a byte array and nil as the second parameter (that&rsquo;s error)</p>
+
+<h3 id="the-last-part:31530fea85ab7d72231b769ca8c10767">The last part</h3>
+
+<p>And now it&rsquo;s just the simple stuff that&rsquo;s left.</p>
+
+<p>We&rsquo;re checking if there&rsquo;s an error, checking if token is valid and if not, return true and nil.Should be very straight forward.</p></li>
+</ul>
+
+        </div>
+        <div class="sharing">
+<a href="https://twitter.com/intent/tweet?status=Validate%20a%20JWT%20token%20in%20go%20-%20tutorial%2c%20with%20example-http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f" target="_blank" title="Follow me on Twitter" class="twitter">
+<span class="fa fa-twitter-square fa-3x"></span></a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f" target="_blank" title="Join me on Facebook" class="facebook">
+<span class="fa fa-facebook-square fa-3x"></span></a>
+<a href="https://plus.google.com/share?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f" target="_blank" title="Google+" class="googleplus">
+<span class="fa fa-google-plus-square fa-3x"></span></a>
+<a href="http://www.linkedin.com/shareArticle?mini=true&url=http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f&title=Validate%20a%20JWT%20token%20in%20go%20-%20tutorial%2c%20with%20example" target="_blank" title="LinkedIn" class="linkedin">
+<span class="fa fa-linkedin-square fa-3x"></span></a>
+<a href="http://www.reddit.com/submit?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f" target="_blank" title="Reddit" class="reddit"><span class="fa fa-reddit-square fa-3x"></span></a>
+<a href="http://www.stumbleupon.com/submit?url=http%3a%2f%2frootabout.com%2f2012%2f04%2fvalidate-a-jwt-token-in-go---tutorial-with-example%2f" target="_blank" title="StumbleUpon" class="stumbleupon"><span class="fa fa-stumbleupon fa-3x">
+</span></a>
+</div>
+        
+
+
+
+      </div>
+    </div>
+
+  </body>
+  
+</html>
