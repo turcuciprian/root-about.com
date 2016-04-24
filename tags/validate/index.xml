@@ -19,6 +19,8 @@
 
 &lt;h3 id=&#34;the-full-code:31530fea85ab7d72231b769ca8c10767&#34;&gt;The full code&lt;/h3&gt;
 
+&lt;p&gt;So here&amp;rsquo;s what we&amp;rsquo;re dealing with:&lt;/p&gt;
+
 &lt;pre&gt;&lt;code&gt;func ValidateToken(tokenString string, myToken string) (bool, error) {
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
@@ -44,7 +46,7 @@
 
 &lt;p&gt;That&amp;rsquo;s basically a function that we will use to validate the code. It has 2 parameters. One is the token string that we have to validate. Secondly is the token key only the server knows and that was used when generating the token.&lt;/p&gt;
 
-&lt;h3 id=&#34;validatin-the-token-checking-the-alg:31530fea85ab7d72231b769ca8c10767&#34;&gt;validatin the token, checking the alg&lt;/h3&gt;
+&lt;h3 id=&#34;validating-the-token-checking-the-alg:31530fea85ab7d72231b769ca8c10767&#34;&gt;Validating the token, checking the alg&lt;/h3&gt;
 
 &lt;p&gt;We need to check that the alg is what we think it is as a security vulnerability was found in a previous version of jwt go and the documentation of the library stresses about it. So, first we create 2 new variables:&lt;/p&gt;
 
